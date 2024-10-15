@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promises</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin:0;
+            padding:0;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Feching Data With Promises</h1>
+    <button  onclick="sendProduct()">Send Product</button>
+
+
+
+    <script>       
+let API = "https://api.escuelajs.co/api/v1/products";
+    function fetchData(url){
+        fetch(url, {method:"GET"})
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.log(error))
+    }
+
+    fetchData(API)
+
+    let data = {
+    "title": "New Product",
+    "price": 10,
+    "description": "A description",
+    "categoryId": 1,
+    "images": ["https://placeimg.com/640/480/any"]
+    }
+
+    function sendProduct(){
+        fetch(API, {
+        method:"POST", 
+        mode:'cors',
+        credentials:'same-origin',
+        headers:{
+            'content-Type':'application/json'
+        },
+        body:JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(error => console.log(error))
+    }
+    </script>
+</body>
+</html>

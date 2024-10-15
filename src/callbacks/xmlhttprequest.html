@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XMLHttpRequest</title>
+    <script type="module">
+        const API = "https://api.escuelajs.co/api/v1/products";
+        let showProducts = document.querySelector(".products");
+        
+
+        function fetchData(url, callback){
+            let xhr = new XMLHttpRequest()
+            xhr.open('GET', url, true);
+            xhr.onreadystatechange = (event) =>{
+             if(xhr.readyState === 4){
+                if(xhr.status === 200){
+                    callback(JSON.parse(xhr.responseText))
+                }
+             }   
+            }
+            xhr.send()
+        }
+
+        function handleResponse(data){
+            data.forEach((item, index) =>{
+                if(index < 10){
+                    showProducts.innerHTML += `<li>${item.title}</li>`
+                }
+                
+            })
+        }
+
+        fetchData(API, handleResponse)
+
+
+
+
+
+
+    </script>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>XMLHttpRequest</h1>
+    <ul class="products">
+
+    </ul>
+</body>
+</html>
