@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async Await</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin:0;
+            padding:0;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Feching Data With Promises</h1>
+    <button  onclick="sendProduct()">Send Product</button>
+
+
+
+    <script>       
+        let API = "https://api.escuelajs.co/api/v1/products";
+
+    async function fetchData(url){
+        try{
+            let response = await fetch(url);
+            let data = await response.json();
+            console.log(data)
+        }catch(error){
+            console.log("yubito error: "+error)
+        }
+    }
+
+        fetchData("")
+
+    </script>
+</body>
+</html>
